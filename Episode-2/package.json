@@ -4,6 +4,8 @@
   "description": "This is sample javascript project.",
 
   "scripts": {
+    "start":"parcel IndexPageWithReactJS.html",
+    "build": "parcel build IndexPageWithReactJS.html",
     "test": "jest"
   },
   "repository": {
