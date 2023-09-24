@@ -99,6 +99,8 @@ const Header = () => {
     </div>
   );
 };
+
+//new card each time =>  <RestaurantCard i/p = "" />,<RestaurantCard i/p="" />
 const RestaurantCard = (props) => {
   console.log(props);
   return (
@@ -107,26 +109,35 @@ const RestaurantCard = (props) => {
         className="res-logo"
         src={
           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          props.cardData.info.cloudinaryImageId
+          props.cloudinaryImageId
         }
       ></img>
-      <h3>{props.cardData.info.name}</h3>
-      <h4>{props.cardData.info.cuisines.join(", ")}</h4>
-      <h4>{props.cardData.info.avgRating}</h4>
-      <h4>{props.cardData.info.sla.slaString}</h4>
+      <h3>{props.restaurantName}</h3>
+      <h4>{props.cuisines}</h4>
+      <h4>{props.avgRating}</h4>
+      <h4>{props.deliveryTime}</h4>
     </div>
   );
 };
 
 const Body = () => {
-  let cardElement = [];
-  for (let i = 0; i < data.restaurants.length; i++) {
-    cardElement.push(<RestaurantCard cardData={data.restaurants[i]} />);
+  let cardItem = [];
+  for (i = 0; i < data.restaurants.length; i++) {
+    cardItem[i] = (
+      <RestaurantCard
+        restaurantName={data.restaurants[i].info.name}
+        cuisines={data.restaurants[i].info.cuisines.join(", ")}
+        avgRating={data.restaurants[i].info.avgRating}
+        deliveryTime={data.restaurants[i].info.sla.deliveryTime}
+        cloudinaryImageId={data.restaurants[i].info.cloudinaryImageId}
+      />
+    );
   }
+  console.log(cardItem);
   return (
     <div className="body">
       <div className="search">search</div>
-      <div className="restro-container">{cardElement}</div>
+      <div className="restro-container">{cardItem}</div>
     </div>
   );
 };
